@@ -8,6 +8,5 @@ public class Main {
 
         Dog d1 = new Dog(Sex.MALE, 5, 10, Colour.BLACK, Race.BULL_DOG);
         Animal d2 = new Dog(Sex.MALE, 4, 12, Colour.BROWN, Race.ROTTWEILER);
-
     }
 }
