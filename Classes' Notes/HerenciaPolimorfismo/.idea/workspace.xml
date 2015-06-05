@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4191348-818f-41fb-a097-9482dc4118f6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 4/JBT - Exercise 4.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 1/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 1/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 2/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 2/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 3/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 3/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Objetos/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Objetos/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 1/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 1/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 2/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 2/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 3/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 3/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 4/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Current Exercises/JBT - Exercise 4/.idea/workspace.xml" />
     </list>
     <ignored path="HerenciaPolimorfismo.iws" />
     <ignored path=".idea/workspace.xml" />
