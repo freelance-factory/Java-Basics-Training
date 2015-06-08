@@ -3,14 +3,12 @@ package com.company.model;
 /**
  * Created by leonardoriviere on 2/5/15.
  */
-public class Animal {
+public abstract class Animal {
 
     private Sex sex = Sex.MALE;
+    private Food food;
     private int age;
     private int weight;
-
-    public Animal() {
-    }
 
     public Animal(Sex sex, int age, int weight) {
         this.sex = sex;
@@ -18,31 +16,23 @@ public class Animal {
         this.weight = weight;
     }
 
-    protected void born() {
-        System.out.println("I'm an animal, and I'm alive!");
+    public abstract void born();
+
+    private static class Food {
+
+        private String brand;
+
+        public Food(String brand) {
+            this.brand = brand;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
     }
 
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
 }

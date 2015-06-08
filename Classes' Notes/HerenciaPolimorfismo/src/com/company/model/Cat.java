@@ -3,12 +3,12 @@ package com.company.model;
 /**
  * Created by leonardoriviere on 2/5/15.
  */
-public class Dog extends Animal {
+public class Cat extends Animal {
 
     private Colour colour;
     private Race race;
 
-    public Dog(Sex sex, int age, int weight, Colour colour, Race race) {
+    public Cat(Sex sex, int age, int weight, Colour colour, Race race) {
         super(sex, age, weight);
         this.colour = colour;
         this.race = race;
@@ -29,7 +29,7 @@ public class Dog extends Animal {
     }
 
     public void born(int year, int century) {
-        System.out.println("I'm a dog, It's " + year + " and I'm alive!");
+        System.out.println("I'm a cat, It's " + year + " and I'm alive!");
         System.out.println("Century: " + century);
     }
 
