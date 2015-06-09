@@ -13,6 +13,7 @@ public class Rectangle extends Shape{
     }
 
     public Rectangle(double width, double length) {
+        super();
         this.width = width;
         this.length = length;
     }
