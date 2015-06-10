@@ -32,28 +32,28 @@ public class Main {
     }
 
     public static void a() throws Exception {
-        System.out.println("--- A ---");
+        System.err.println("--- A ---");
         try {
             b();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             throw e;
         }
         z();
     }
 
     public static void b() throws Exception {
-        System.out.println("--- B ---");
+        System.err.println("--- B ---");
         throwException();
         c();
     }
 
     public static void c() {
-        System.out.println("--- C ---");
+        System.err.println("--- C ---");
     }
 
     public static void z() {
-        System.out.println("--- Z ---");
+        System.err.println("--- Z ---");
     }
 
     private static void throwException() throws Exception {
