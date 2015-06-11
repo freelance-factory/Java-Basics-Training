@@ -49,7 +49,7 @@ public class MyClassTest {
         names[3] = name4;
         names[4] = name5;
 
-        System.out.printf(String.format("Cantidad de nombres: %d", names.length));
+        System.out.println(String.format("Cantidad de nombres: %d. ", names.length));
         Assert.assertEquals(5, names.length);
 
         // Object[] objects = new Object[4];
@@ -82,6 +82,7 @@ public class MyClassTest {
 
         nameList.clear();
         Assert.assertTrue(nameList.isEmpty());
+        System.out.println("Lista -> " + nameList);
 
         /*
          * java.util.Set
@@ -109,8 +110,14 @@ public class MyClassTest {
             map.put(i, name);
             i++;
         }
+        System.out.println("Map -> " + map);
         map.put(4, "Cris Morena");
         System.out.println("Map -> " + map);
 
+    }
+
+    @Test
+    public void testGenerics() {
+        Box box = new Box();
     }
 }
