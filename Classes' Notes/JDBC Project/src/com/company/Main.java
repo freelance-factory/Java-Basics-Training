@@ -11,6 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Person p1 = new Person(655322,"Leonardo","Riviere",24);
+        Person p2 = new Person(655324,"Cristian","Miranda",24);
+        Person p3 = new Person(655325,"John Wayne","Cleaver",20);
+        Person p4 = new Person(655323,"Rafe","Spall",29);
+
         System.out.println("-------- PostgreSQL "
                 + "JDBC Connection Testing ------------");
 
@@ -50,9 +55,13 @@ public class Main {
 
             PersonDao personDao = new PersonDao(connection);
             try {
-                Person person;
-                person = personDao.getById(655321);
-                System.out.printf(person.toString());
+                Person person1, person2;
+                person1 = personDao.getById(655321);
+                System.out.printf(person1.toString());
+                personDao.delete(p4);
+                personDao.save(p2);
+                personDao.save(p3);
+                personDao.update(p1);
             } catch (SQLException e) {
                 System.out.println("Error while playing with the DB");
                 e.printStackTrace();
