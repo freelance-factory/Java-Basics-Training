@@ -17,14 +17,7 @@ public class PersonDao {
         this.connection = connection;
     }
 
-    public Person getById(Integer id) throws SQLException {
-
-        String query = "SELECT * FROM PERSON WHERE ID = '" + id + "'";
-
-        //String asd = "Esto tiene \"comillas\" dobles";
-
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+    public Person mapResultSet(ResultSet rs) {
         List<Person> people = new ArrayList<Person>();
         while (rs.next()) {
             String name = rs.getString("NAME");
@@ -34,6 +27,19 @@ public class PersonDao {
             people.add(person);
         }
         return !people.isEmpty() ? people.get(0) : null;
+    };
+
+    public Person getById(Integer id) throws SQLException {
+
+        String query = "SELECT * FROM PERSON WHERE ID = '" + id + "'";
+
+        //String asd = "Esto tiene \"comillas\" dobles";
+
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        mapResultSet(ResultSet rs);
+        )
+
     }
 
     public void delete(Person person) throws SQLException {

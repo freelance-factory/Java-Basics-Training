@@ -4,17 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.company.dao.PersonDao;
-import com.company.model.Person;
+import com.company.dao.CarDao;
+import com.company.model.Car;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Person p1 = new Person(655322,"Leonardo","Riviere",24);
-        Person p2 = new Person(655324,"Cristian","Miranda",24);
-        Person p3 = new Person(655325,"John Wayne","Cleaver",20);
-        Person p4 = new Person(655323,"Rafe","Spall",29);
+//        Person p1 = new Person(655322,"Leonardo","Riviere",24);
+//        Person p2 = new Person(655324,"Cristian","Miranda",24);
+//        Person p3 = new Person(655325,"John Wayne","Cleaver",20);
+//        Person p4 = new Person(655323,"Rafe","Spall",29);
+        Car c1 = new Car(4001,"Volkswagen","Fox",2013);
+        Car c2 = new Car(4003,"Volkswagen","Gol",2015);
+        Car c3 = new Car(4002,"Volkswagen","Vento",2006);
+
 
         System.out.println("-------- PostgreSQL "
                 + "JDBC Connection Testing ------------");
@@ -53,15 +57,24 @@ public class Main {
         if (connection != null) {
             System.out.println("You made it, take control your database now!");
 
-            PersonDao personDao = new PersonDao(connection);
+            CarDao carDao = new CarDao(connection);
             try {
-                Person person1, person2;
-                person1 = personDao.getById(655321);
-                System.out.printf(person1.toString());
-                personDao.delete(p4);
-                personDao.save(p2);
-                personDao.save(p3);
-                personDao.update(p1);
+//                Person person1, person2;
+//                person1 = personDao.getById(655321);
+//                System.out.printf(person1.toString());
+//                personDao.delete(p4);
+//                personDao.save(p2);
+//                personDao.save(p3);
+//                personDao.update(p1);
+
+                Car car1, car2;
+                car1 = carDao.getById(4001);
+                System.out.printf(car1.toString());
+                carDao.delete(c3);
+                carDao.save(c2);
+                carDao.update(c1);
+
+
             } catch (SQLException e) {
                 System.out.println("Error while playing with the DB");
                 e.printStackTrace();
