@@ -38,8 +38,6 @@ public class PersonDao {
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         mapResultSet(ResultSet rs);
-        )
-
     }
 
     public void delete(Person person) throws SQLException {

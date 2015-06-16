@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class Person {
+public class Person extends Entity{
 
     public int id;
     public String name;
@@ -27,10 +27,12 @@ public class Person {
                 '}';
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

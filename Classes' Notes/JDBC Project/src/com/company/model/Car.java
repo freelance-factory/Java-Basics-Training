@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class Car {
+public class Car extends Entity{
 
     public int id;
     public String brand;
@@ -27,10 +27,13 @@ public class Car {
                 '}';
     }
 
+
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
