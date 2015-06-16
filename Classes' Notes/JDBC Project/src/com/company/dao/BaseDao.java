@@ -7,63 +7,56 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.model.Person;
+import com.company.model.Entity;
 
 public class BaseDao {
 
-    private final Connection connection;
+    protected final Connection connection;
 
     public BaseDao(Connection connection) {
         this.connection = connection;
     }
 
-    public Person getById(Integer id) throws SQLException {
+    public ResultSet rowById(Integer id) throws SQLException {
 
         String query = "SELECT * FROM ENTITY WHERE ID = '" + id + "'";
-
-        //String asd = "Esto tiene \"comillas\" dobles";
-
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
-        List<Person> people = new ArrayList<Person>();
+        return rs;
+    }
+
+    public Entity listById(ResultSet rs) throws SQLException {
+        List<Entity> entities = new ArrayList<Entity>();
         while (rs.next()) {
-            String name = rs.getString("NAME");
-            String lastName = rs.getString("LAST_NAME");
-            Integer age = rs.getInt("AGE");
-            Person person = new Person(id, name, lastName, age);
-            people.add(person);
+            Integer id = rs.getInt("ID");
+            Entity entity = new Entity(id);
+            entities.add(entity);
         }
-        return !people.isEmpty() ? people.get(0) : null;
+        return !entities.isEmpty() ? entities.get(0) : null;
     }
 
-    public void delete(Person person) throws SQLException {
 
-        String query = "DELETE FROM ENTITY WHERE ID = '" + person.id + "'";
+    public void delete(Entity entity) throws SQLException {
 
-        Statement stmt = connection.createStatement();
-
-        stmt.execute(query);
+        String query = "DELETE FROM ENTITY WHERE ID = '" + entity.id + "'";
 
     }
 
-    public void save(Person person) throws SQLException {
+    public void save(Entity entity) throws SQLException {
 
-        String query = "INSERT INTO ENTITY (ID, NAME, LAST_NAME, AGE) VALUES (" + person.id + ",'" + person.name +
-                "','" + person.lastName + "'," + person.age + ");";
-
-        Statement stmt = connection.createStatement();
-
-        stmt.execute(query);
+        String query = "INSERT INTO ENTITY ID VALUES " + entity.id;
 
     }
 
-    public void update(Person person) throws SQLException {
+    public void update(Entity entity) throws SQLException {
 
-        String query = "UPDATE PERSON SET (ID, NAME, LAST_NAME, AGE) = (" + person.id + ",'" + person.name +
-                "','" + person.lastName + "'," + person.age + ") WHERE ID = " + person.id + ";";
+        String query = "UPDATE PERSON SET ID = " + entity.id + " WHERE ID = " + entity.id + ";";
+
+    }
+
+    public void makeQuery(String query) throws SQLException {
 
         Statement stmt = connection.createStatement();
-
         stmt.execute(query);
 
     }
