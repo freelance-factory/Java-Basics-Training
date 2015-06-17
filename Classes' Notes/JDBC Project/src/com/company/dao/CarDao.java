@@ -3,7 +3,6 @@ package com.company.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,27 +14,22 @@ public class CarDao extends BaseDao{
         super(connection);
     }
 
-    @Override
-    public ResultSet rowById(Integer id) throws SQLException {
-
+    public Car getById(Integer id) throws SQLException {
         String query = "SELECT * FROM CAR WHERE ID = '" + id + "'";
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        return rs;
-
+        Car car = listById(super.queryReturnResultSet(query));
+        return car;
     }
 
     @Override
     public Car listById(ResultSet rs) throws SQLException {
-
         List<Car> cars = new ArrayList<Car>();
         while (rs.next()) {
             String brand = rs.getString("BRAND");
             String model = rs.getString("MODEL");
-            Integer age = rs.getInt("YEAR");
+            Integer year = rs.getInt("YEAR");
             Integer id = rs.getInt("ID");
-            Car person = new Car(id, brand, model, age);
-            cars.add(person);
+            Car car = new Car(id, brand, model, year);
+            cars.add(car);
         }
         return !cars.isEmpty() ? cars.get(0) : null;
 

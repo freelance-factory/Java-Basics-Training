@@ -3,7 +3,6 @@ package com.company.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +14,10 @@ public class PersonDao extends BaseDao {
         super(connection);
     }
 
-    @Override
-    public ResultSet rowById(Integer id) throws SQLException {
-
+    public Person getById(Integer id) throws SQLException {
         String query = "SELECT * FROM PERSON WHERE ID = '" + id + "'";
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        return rs;
-
+        Person person = listById(super.queryReturnResultSet(query));
+        return person;
     }
 
     @Override

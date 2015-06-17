@@ -17,9 +17,15 @@ public class BaseDao {
         this.connection = connection;
     }
 
-    public ResultSet rowById(Integer id) throws SQLException {
+    public Entity getById(Integer id) throws SQLException {
 
         String query = "SELECT * FROM ENTITY WHERE ID = '" + id + "'";
+        Entity entity = listById(queryReturnResultSet(query));
+        return entity;
+
+    }
+
+    public ResultSet queryReturnResultSet(String query) throws SQLException {
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         return rs;
