@@ -15,9 +15,9 @@ public class CarDao extends BaseDao{
     }
 
     public Car getById(Integer id) throws SQLException {
-        String query = "SELECT * FROM CAR WHERE ID = '" + id + "'";
-        Car car = listById(super.queryReturnResultSet(query));
-        return car;
+        String query = "SELECT * FROM " + getTable() + " WHERE " +
+                getPrimaryKey() + " = '" + id + "'";
+        return listById(super.queryReturnResultSet(query));
     }
 
     @Override
@@ -32,61 +32,52 @@ public class CarDao extends BaseDao{
             cars.add(car);
         }
         return !cars.isEmpty() ? cars.get(0) : null;
-
     }
 
+    @Override
+    public String getPrimaryKey() {
+        return "ID";
+    }
+
+    @Override
+    public String getTable() {
+        return "CAR";
+    }
+
+    @Override
+    public String getColumns() {
+        List<String> list = new ArrayList<String>();
+        list.add(getPrimaryKey());
+        list.add("BRAND");
+        list.add("MODEL");
+        list.add("YEAR");
+        String a = "(" + list.get(0);
+        for (int i = 1; i < list.size(); i++){
+            a = a.concat(", ");
+            a = a.concat(list.get(i));
+        };
+        a = a.concat(")");
+        return a;
+    }
 
     public void delete(Car car) throws SQLException {
-
-        String query = "DELETE FROM CAR WHERE ID = " + car.id + ";";
+        String query = "DELETE FROM " + getTable() + " WHERE " +
+                getPrimaryKey() + " = " + car.id + ";";
         super.makeQuery(query);
-
     }
 
     public void update(Car car) throws SQLException {
-
-        String query = "UPDATE CAR SET (ID, BRAND, MODEL, YEAR) = (" + car.id + ",'" + car.brand +
-                "','" + car.model + "'," + car.year + ") WHERE ID = " + car.id + ";";
+        String query = "UPDATE " + getTable() + " SET " + getColumns() +
+                " = (" + car.id + ",'" + car.brand + "','" + car.model +
+                "'," + car.year + ") WHERE " + getPrimaryKey() + " = " +
+                car.id + ";";
         super.makeQuery(query);
     }
 
     public void save(Car car) throws SQLException {
-
-        String query = "INSERT INTO CAR (ID, BRAND, MODEL, YEAR) VALUES (" + car.id + ",'" + car.brand +
-                "','" + car.model + "'," + car.year + ");";
+        String query = "INSERT INTO " + getTable() + " " + getColumns() +
+                " VALUES (" + car.id + ",'" + car.brand + "','" +
+                car.model + "'," + car.year + ");";
         super.makeQuery(query);
-
     }
-
-    //    public void delete(Car car) throws SQLException {
-//
-//        String query = "DELETE FROM CAR WHERE ID = '" + car.id + "'";
-//
-//        Statement stmt = connection.createStatement();
-//
-//        stmt.execute(query);
-//
-//    }
-//
-//    public void save(Car car) throws SQLException {
-//
-//        String query = "INSERT INTO CAR (ID, BRAND, MODEL, YEAR) VALUES (" + car.id + ",'" + car.brand +
-//                "','" + car.model + "'," + car.year + ");";
-//
-//        Statement stmt = connection.createStatement();
-//
-//        stmt.execute(query);
-//
-//    }
-//
-//    public void update(Car car) throws SQLException {
-//
-//        String query = "UPDATE CAR SET (ID, BRAND, MODEL, YEAR) = (" + car.id + ",'" + car.brand +
-//                "','" + car.model + "'," + car.year + ") WHERE ID = " + car.id + ";";
-//
-//        Statement stmt = connection.createStatement();
-//
-//        stmt.execute(query);
-//
-//    }
 }
