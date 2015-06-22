@@ -18,17 +18,14 @@ public class BaseDao {
     }
 
     public Entity getById(Integer id) throws SQLException {
-
-        String query = "SELECT * FROM ENTITY WHERE ID = '" + id + "'";
-        Entity entity = listById(queryReturnResultSet(query));
-        return entity;
-
+        String query = "SELECT * FROM " + getTable() + " WHERE " +
+                getPrimaryKey() + " = '" + id + "'";
+        return listById(queryReturnResultSet(query));
     }
 
     public ResultSet queryReturnResultSet(String query) throws SQLException {
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        return rs;
+        return stmt.executeQuery(query);
     }
 
     public Entity listById(ResultSet rs) throws SQLException {
@@ -41,30 +38,44 @@ public class BaseDao {
         return !entities.isEmpty() ? entities.get(0) : null;
     }
 
+    public String getPrimaryKey() {
+        return "ID";
+    }
+
+    public String getTable() {
+        return "ENTITY";
+    }
+
+    public String getColumns() {
+        List<String> list = new ArrayList<String>();
+        list.add(getPrimaryKey());
+        String a = "(" + list.get(0);
+        for (int i = 1; i < list.size(); i++){
+            a = a.concat(", ");
+            a = a.concat(list.get(i));
+        };
+        a = a.concat(")");
+        return a;
+    }
 
     public void delete(Entity entity) throws SQLException {
-
-        String query = "DELETE FROM ENTITY WHERE ID = '" + entity.id + "'";
-
+        String query = "DELETE FROM " + getTable() + " WHERE ID = '" +
+                entity.id + "'";
     }
 
     public void save(Entity entity) throws SQLException {
-
-        String query = "INSERT INTO ENTITY ID VALUES " + entity.id;
-
+        String query = "INSERT INTO " + getTable() + " ID VALUES " +
+                entity.id;
     }
 
     public void update(Entity entity) throws SQLException {
-
-        String query = "UPDATE PERSON SET ID = " + entity.id + " WHERE ID = " + entity.id + ";";
-
+        String query = "UPDATE " + getTable() + " SET " + getPrimaryKey() +
+                " = " + entity.id + " WHERE ID = " + entity.id + ";";
     }
 
     public void makeQuery(String query) throws SQLException {
-
         Statement stmt = connection.createStatement();
         stmt.execute(query);
-
     }
 
 }

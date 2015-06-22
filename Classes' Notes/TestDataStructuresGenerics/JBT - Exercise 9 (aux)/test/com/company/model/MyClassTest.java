@@ -36,6 +36,7 @@ public class MyClassTest {
 
     @Test
     public void dataStructures() {
+
         String name1 = new String("Pepe");
         String name2 = new String("Pepe 2");
         String name3 = new String("Pepe 3");

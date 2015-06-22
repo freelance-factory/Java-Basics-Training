@@ -14,10 +14,11 @@ public class PersonDao extends BaseDao {
         super(connection);
     }
 
+    @Override
     public Person getById(Integer id) throws SQLException {
-        String query = "SELECT * FROM PERSON WHERE ID = '" + id + "'";
-        Person person = listById(super.queryReturnResultSet(query));
-        return person;
+        String query = "SELECT * FROM " + getTable() + " WHERE " + getPrimaryKey() +
+                " = '" + id + "'";
+        return listById(super.queryReturnResultSet(query));
     }
 
     @Override
@@ -32,28 +33,50 @@ public class PersonDao extends BaseDao {
             people.add(person);
         }
         return !people.isEmpty() ? people.get(0) : null;
+    }
 
+    @Override
+    public String getPrimaryKey() {
+        return "ID";
+    }
+
+    @Override
+    public String getTable() {
+        return "PERSON";
+    }
+
+    public String getColumns() {
+        List<String> list = new ArrayList<String>();
+        list.add(getPrimaryKey());
+        list.add("NAME");
+        list.add("LAST_NAME");
+        list.add("AGE");
+        String a = "(" + list.get(0);
+        for (int i = 1; i < list.size(); i++){
+            a = a.concat(", ");
+            a = a.concat(list.get(i));
+        };
+        a = a.concat(")");
+        return a;
     }
 
     public void delete(Person person) throws SQLException {
-
-        String query = "DELETE FROM PERSON WHERE ID = " + person.id + ";";
+        String query = "DELETE FROM " + getTable() + " WHERE " + getPrimaryKey() +
+                " = " + person.id + ";";
         super.makeQuery(query);
-
     }
 
     public void update(Person person) throws SQLException {
-
-        String query = "UPDATE PERSON SET (ID, NAME, LAST_NAME, AGE) = (" + person.id + ",'" + person.name +
-                "','" + person.lastName + "'," + person.age + ") WHERE ID = " + person.id + ";";
+        String query = "UPDATE " + getTable() + " SET " + getColumns() + " = ("
+                + person.id + ",'" + person.name + "','" + person.lastName + "',"
+                + person.age + ") WHERE " + getPrimaryKey() + " = " + person.id + ";";
         super.makeQuery(query);
     }
 
     public void save(Person person) throws SQLException {
-
-        String query = "INSERT INTO PERSON (ID, NAME, LAST_NAME, AGE) VALUES (" + person.id + ",'" + person.name +
-                "','" + person.lastName + "'," + person.age + ");";
+        String query = "INSERT INTO " + getTable() + " " + getColumns() +
+                " VALUES (" + person.id + ",'" + person.name + "','" +
+                person.lastName + "'," + person.age + ");";
         super.makeQuery(query);
-
     }
 }
