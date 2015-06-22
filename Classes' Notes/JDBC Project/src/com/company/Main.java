@@ -61,27 +61,27 @@ public class Main {
 
             PersonDao personDao = new PersonDao(connection);
             try {
-                Person person1 = personDao.getById(655322);
-                System.out.printf(person1.toString());
-                personDao.delete(p4);
-                personDao.save(p2);
-                personDao.save(p3);
-                personDao.update(p1);
+//                Person person1 = personDao.getById(655322);
+//                System.out.printf(person1.toString());
+//                personDao.delete(p4);
+//                personDao.save(p2);
+//                personDao.save(p3);
+//                personDao.update(p1);
 
-//                Person person = new Person(123, "Sheila", "Miranda", 13);
-//                personDao.save(person);
-//
-//                Person result = personDao.getById(123);
-//                System.out.println(result);
-//
-//                person.setName("Roberta");
-//                personDao.update(person);
-//                result = personDao.getById(123);
-//                System.out.println(result);
-//
-//                personDao.delete(person);
-//                result = personDao.getById(123);
-//                System.out.println(result);
+                Person person = new Person(123, "Sheila", "Miranda", 13);
+                personDao.save(person);
+
+                Person result = personDao.getById(123);
+                System.out.println(result);
+
+                person.setName("Roberta");
+                personDao.update(person);
+                result = personDao.getById(123);
+                System.out.println(result);
+
+                personDao.delete(person);
+                result = personDao.getById(123);
+                System.out.println(result);
 
 
             } catch (SQLException e) {
@@ -92,10 +92,10 @@ public class Main {
             CarDao carDao = new CarDao(connection);
             try {
                 Car car1 = carDao.getById(4000);
-                System.out.printf(car1.toString());
-                carDao.delete(c3);
-                carDao.save(c2);
-                carDao.update(c1);
+//                System.out.printf(car1.toString());
+//                carDao.delete(c3);
+//                carDao.save(c2);
+//                carDao.update(c1);
             } catch (SQLException e) {
                 System.out.println("Error while playing with the DB");
                 e.printStackTrace();

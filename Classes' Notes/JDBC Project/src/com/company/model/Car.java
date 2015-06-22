@@ -2,16 +2,12 @@ package com.company.model;
 
 public class Car extends Entity{
 
-    public int id;
     public String brand;
     public String model;
     public int year;
 
-    public Car() {
-    }
-
     public Car(int id, String brand, String model, int year) {
-        this.id = id;
+        super(id);
         this.brand = brand;
         this.model = model;
         this.year = year;
@@ -25,17 +21,6 @@ public class Car extends Entity{
                 ", brand='" + brand + '\'' +
                 ", id=" + id +
                 '}';
-    }
-
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getBrand() {

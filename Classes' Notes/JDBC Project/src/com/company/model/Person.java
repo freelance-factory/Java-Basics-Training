@@ -2,16 +2,12 @@ package com.company.model;
 
 public class Person extends Entity{
 
-    public int id;
-    public String name;
-    public String lastName;
-    public int age;
-
-    public Person() {
-    }
+    private String name;
+    private String lastName;
+    private int age;
 
     public Person(int id, String name, String lastName, int age) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -25,16 +21,6 @@ public class Person extends Entity{
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

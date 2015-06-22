@@ -2,10 +2,7 @@ package com.company.model;
 
 public class Entity {
 
-    public int id;
-
-    public Entity() {
-    }
+    protected int id;
 
     public Entity(int id) {
         this.id = id;
