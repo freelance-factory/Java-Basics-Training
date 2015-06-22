@@ -25,10 +25,10 @@ public class PersonDao extends BaseDao {
     public Person listById(ResultSet rs) throws SQLException {
         List<Person> people = new ArrayList<Person>();
         while (rs.next()) {
-            String name = rs.getString("NAME");
-            String lastName = rs.getString("LAST_NAME");
-            Integer age = rs.getInt("AGE");
-            Integer id = rs.getInt("ID");
+            String name = rs.getString(String.valueOf(getColumnsArray().get(1)));
+            String lastName = rs.getString(String.valueOf(getColumnsArray().get(2)));
+            Integer age = rs.getInt(String.valueOf(getColumnsArray().get(3)));
+            Integer id = rs.getInt(String.valueOf(getColumnsArray().get(0)));
             Person person = new Person(id, name, lastName, age);
             people.add(person);
         }
@@ -45,38 +45,51 @@ public class PersonDao extends BaseDao {
         return "PERSON";
     }
 
+    @Override
     public String getColumns() {
+        ArrayList list = getColumnsArray();
+        String a = "(" + list.get(0);
+        for (int i = 1; i < list.size(); i++){
+            a = a.concat(", ");
+            a = a.concat(String.valueOf(list.get(i)));
+        }
+        a = a.concat(")");
+        return a;
+    }
+
+    @Override
+    public ArrayList getColumnsArray() {
         List<String> list = new ArrayList<String>();
         list.add(getPrimaryKey());
         list.add("NAME");
         list.add("LAST_NAME");
         list.add("AGE");
-        String a = "(" + list.get(0);
-        for (int i = 1; i < list.size(); i++){
-            a = a.concat(", ");
-            a = a.concat(list.get(i));
-        };
-        a = a.concat(")");
-        return a;
+        return (ArrayList) list;
+    }
+
+    public String getColumnsValues(Person person){
+        return "(" + person.id + ",'" + person.name + "','" + person.lastName + "'," + person.age + ")";
+    }
+
+    public int getPrimaryKeyValue(Person person) {
+        return person.id;
     }
 
     public void delete(Person person) throws SQLException {
         String query = "DELETE FROM " + getTable() + " WHERE " + getPrimaryKey() +
-                " = " + person.id + ";";
+                " = " + getPrimaryKeyValue(person) + ";";
         super.makeQuery(query);
     }
 
     public void update(Person person) throws SQLException {
-        String query = "UPDATE " + getTable() + " SET " + getColumns() + " = ("
-                + person.id + ",'" + person.name + "','" + person.lastName + "',"
-                + person.age + ") WHERE " + getPrimaryKey() + " = " + person.id + ";";
+        String query = "UPDATE " + getTable() + " SET " + getColumns() + " = " + getColumnsValues(person) + " WHERE " +
+                getPrimaryKey() + " = " + getPrimaryKeyValue(person) + ";";
         super.makeQuery(query);
     }
 
     public void save(Person person) throws SQLException {
         String query = "INSERT INTO " + getTable() + " " + getColumns() +
-                " VALUES (" + person.id + ",'" + person.name + "','" +
-                person.lastName + "'," + person.age + ");";
+                " VALUES " + getColumnsValues(person) + ";";
         super.makeQuery(query);
     }
 }

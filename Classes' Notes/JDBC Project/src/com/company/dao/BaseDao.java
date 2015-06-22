@@ -31,7 +31,7 @@ public class BaseDao {
     public Entity listById(ResultSet rs) throws SQLException {
         List<Entity> entities = new ArrayList<Entity>();
         while (rs.next()) {
-            Integer id = rs.getInt("ID");
+            Integer id = rs.getInt(String.valueOf(getColumnsArray().get(0)));
             Entity entity = new Entity(id);
             entities.add(entity);
         }
@@ -47,30 +47,45 @@ public class BaseDao {
     }
 
     public String getColumns() {
-        List<String> list = new ArrayList<String>();
-        list.add(getPrimaryKey());
+        ArrayList list = getColumnsArray();
         String a = "(" + list.get(0);
         for (int i = 1; i < list.size(); i++){
             a = a.concat(", ");
-            a = a.concat(list.get(i));
-        };
+            a = a.concat(String.valueOf(list.get(i)));
+        }
         a = a.concat(")");
         return a;
     }
 
+    public ArrayList getColumnsArray() {
+        List<String> list = new ArrayList<String>();
+        list.add(getPrimaryKey());
+        return (ArrayList) list;
+    }
+
+    public String getColumnsValues(Entity entity){
+        return "(" + entity.id + ")";
+    }
+
+    public int getPrimaryKeyValue(Entity entity) {
+        return entity.id;
+    }
+
     public void delete(Entity entity) throws SQLException {
-        String query = "DELETE FROM " + getTable() + " WHERE ID = '" +
-                entity.id + "'";
+        String query = "DELETE FROM " + getTable() + " WHERE " + getPrimaryKey() + " = " + getPrimaryKeyValue(entity) +
+                ";";
+        makeQuery(query);
     }
 
     public void save(Entity entity) throws SQLException {
-        String query = "INSERT INTO " + getTable() + " ID VALUES " +
-                entity.id;
+        String query = "INSERT INTO " + getTable() + " " + getColumns() + " VALUES " + getColumnsValues(entity) + ";";
+        makeQuery(query);
     }
 
     public void update(Entity entity) throws SQLException {
-        String query = "UPDATE " + getTable() + " SET " + getPrimaryKey() +
-                " = " + entity.id + " WHERE ID = " + entity.id + ";";
+        String query = "UPDATE " + getTable() + " SET " + getColumns() + " = " + getColumnsValues(entity) + " WHERE " +
+                getPrimaryKey() + " = " + getPrimaryKeyValue(entity) + ";";
+        makeQuery(query);
     }
 
     public void makeQuery(String query) throws SQLException {
