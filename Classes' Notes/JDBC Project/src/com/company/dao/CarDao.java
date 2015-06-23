@@ -39,46 +39,27 @@ public class CarDao extends BaseDao<Car> {
     }
 
     @Override
-    public String getColumns() {
-        List<String> list = new ArrayList<String>();
+    public List getColumns() {
+        List list = new ArrayList<>();
         list.add(getPrimaryKey());
         list.add("BRAND");
         list.add("MODEL");
         list.add("YEAR");
-        String a = "(" + list.get(0);
-        for (int i = 1; i < list.size(); i++){
-            a = a.concat(", ");
-            a = a.concat(String.valueOf(list.get(i)));
-        }
-        a = a.concat(")");
-        return a;
+        return list;
     }
 
     @Override
-    public String getColumnsValues(Car car){
-        return "(" + car.getId() + ",'" + car.brand + "','" + car.model + "'," + car.year + ")";
+    public List getColumnsValues(Car car) {
+        List list = new ArrayList();
+        list.add(car.getId());
+        list.add("'"+car.getBrand()+"'");
+        list.add("'"+car.getModel()+"'");
+        list.add(car.getYear());
+        return list;
     }
 
     @Override
     public int getPrimaryKeyValue(Car car) {
         return car.getId();
     }
-
-//    public void delete(Car car) throws SQLException {
-//        String query = "DELETE FROM " + getTable() + " WHERE " +
-//                getPrimaryKey() + " = " + getPrimaryKeyValue(car) + ";";
-//        super.makeQuery(query);
-//    }
-//
-//    public void update(Car car) throws SQLException {
-//        String query = "UPDATE " + getTable() + " SET " + getColumns() + " = " + getColumnsValues(car) + " WHERE " +
-//        getPrimaryKey() + " = " + getPrimaryKeyValue(car) + ";";
-//        super.makeQuery(query);
-//    }
-//
-//    public void save(Car car) throws SQLException {
-//        String query = "INSERT INTO " + getTable() + " " + getColumns() +
-//        " VALUES " + getColumnsValues(car) + ";";
-//        super.makeQuery(query);
-//    }
 }

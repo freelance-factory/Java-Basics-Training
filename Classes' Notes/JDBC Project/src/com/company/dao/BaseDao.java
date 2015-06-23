@@ -28,18 +28,20 @@ public abstract class BaseDao<T extends Entity> {
     }
 
     public void delete(T entity) throws SQLException {
-        String query = "DELETE FROM " + getTable() + " WHERE " + getPrimaryKey() + " = " + getPrimaryKeyValue(entity)+ ";";
+        String query = "DELETE FROM " + getTable() + " WHERE " + getPrimaryKey() + " = " + getPrimaryKeyValue(entity) + ";";
         makeQuery(query);
     }
 
     public void save(T entity) throws SQLException {
-        String query = "INSERT INTO " + getTable() + " " + getColumns() + " VALUES " + getColumnsValues(entity) + ";";
+        String query = "INSERT INTO " + getTable() + " " + getTuplaAsString(getColumns()) + " VALUES " +
+                getTuplaAsString(getColumnsValues(entity)) + ";";
         makeQuery(query);
     }
 
     public void update(T entity) throws SQLException {
-        String query = "UPDATE " + getTable() + " SET " + getColumns() + " = " + getColumnsValues(entity) + " WHERE " +
-                getPrimaryKey() + " = " + getPrimaryKeyValue(entity) + ";";
+        String query = "UPDATE " + getTable() + " SET " + getTuplaAsString(getColumns()) + " = "
+                + getTuplaAsString(getColumnsValues(entity)) + " WHERE "
+                + getPrimaryKey() + " = " + getPrimaryKeyValue(entity) + ";";
         makeQuery(query);
     }
 
@@ -48,25 +50,26 @@ public abstract class BaseDao<T extends Entity> {
         stmt.execute(query);
     }
 
-    public abstract T getEntityFromResultSet(ResultSet rs) throws SQLException;
-
-    public abstract String getPrimaryKey();
-
-    public abstract String getTable();
-
-    public abstract String getColumns();
-
-    public abstract int getPrimaryKeyValue(T entity);
-
-    public abstract String getColumnsValues(T entity);
-
-    protected String getTuplaAsString(List<Object> list) {
+    private String getTuplaAsString(List<Object> list) {
         String a = "(" + list.get(0);
-        for (int i = 1; i < list.size(); i++){
+        for (int i = 1; i < list.size(); i++) {
             a = a.concat(", ");
             a = a.concat(String.valueOf(list.get(i)));
         }
         a = a.concat(")");
         return a;
     }
+
+    public abstract T getEntityFromResultSet(ResultSet rs) throws SQLException;
+
+    public abstract String getPrimaryKey();
+
+    public abstract String getTable();
+
+    public abstract List getColumns();
+
+    public abstract int getPrimaryKeyValue(T entity);
+
+    public abstract List getColumnsValues(T entity);
+
 }

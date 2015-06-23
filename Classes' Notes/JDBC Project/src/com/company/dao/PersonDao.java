@@ -39,23 +39,23 @@ public class PersonDao extends BaseDao<Person> {
     }
 
     @Override
-    public String getColumns() {
+    public List getColumns() {
         List list = new ArrayList<>();
         list.add(getPrimaryKey());
         list.add("NAME");
         list.add("LAST_NAME");
         list.add("AGE");
-        return getTuplaAsString(list);
+        return list;
     }
 
     @Override
-    public String getColumnsValues(Person person){
+    public List getColumnsValues(Person person){
         List list = new ArrayList();
         list.add(person.getId());
-        list.add(person.getName());
-        list.add(person.getLastName());
+        list.add("'"+person.getName()+"'");
+        list.add("'"+person.getLastName()+"'");
         list.add(person.getAge());
-        return getTuplaAsString(list);
+        return list;
     }
 
     @Override
